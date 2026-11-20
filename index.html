@@ -3,240 +3,321 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jappware Agentic</title>
+<title>Jappware Agentic — Speed is new Quality</title>
 <meta name="description" content="Jappware Agentic — AI-powered software delivery: specified, tested, reviewed.">
-<!-- Same fonts jappware.com already loads; drop this link when embedding into the site. -->
+<!-- Same fonts and weights jappware.com loads; drop this link when embedding into the site. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Work+Sans:wght@300;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Work+Sans:wght@500;600&display=swap" rel="stylesheet">
 <style>
-  /* Styled after jappware.com. Everything is scoped under .ja so the section can be pasted
-     into an existing page without touching the site's own styles. */
+  /* Design tokens taken from jappware.com. Everything is scoped under .ja so the
+     page can be pasted into the site without touching its own styles. */
   .ja {
-    --ja-dark: #12131a;
-    --ja-dark-2: #1c1d25;
-    --ja-ink: #12131a;
-    --ja-text: #252833;
+    --ja-black: #000000;
+    --ja-ink: #12131a;          /* section headings */
+    --ja-text: #252833;         /* body text, button text */
     --ja-muted: #5b5f6b;
-    --ja-yellow: #fecf38;
+    --ja-secondary: #3a3a3a;    /* Knowledgebase / footer band */
+    --ja-yellow: #fecf38;       /* brand accent */
     --ja-white: #ffffff;
-    --ja-soft: #f7f7f8;
-    --ja-shadow: 0 6px 24px rgba(18, 19, 26, 0.08);
+    --ja-glass: rgba(255,255,255,.15);
+    --ja-shadow: 2px 2px 30px rgba(59,74,98,.15);
+    --ja-radius: 6px;
     font-family: "Nunito", sans-serif;
     font-size: 17px;
-    line-height: 1.6;
+    line-height: 27px;
     color: var(--ja-text);
     background: var(--ja-white);
     -webkit-font-smoothing: antialiased;
   }
-  body { margin: 0; background: #ffffff; }
-
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #fff; }
   .ja *, .ja *::before, .ja *::after { box-sizing: border-box; }
-  .ja :where(h1, h2, h3, p) { margin: 0; }
-  .ja-wrap { max-width: 1170px; margin: 0 auto; padding: 0 24px; }
-  .ja section { padding: 96px 0; }
+  .ja :where(h1, h2, h3, h5, p) { margin: 0; }
+  .ja a { color: inherit; }
+  .ja-container { max-width: 1134px; margin: 0 auto; padding: 0 12px; }
 
-  .ja-h1, .ja-h2 { font-family: "Work Sans", sans-serif; font-weight: 500; letter-spacing: -0.01em; }
-  .ja-h1 { font-size: clamp(36px, 5.2vw, 60px); line-height: 1.2; color: var(--ja-white); max-width: 860px; }
-  .ja-h2 { font-size: clamp(30px, 3.6vw, 45px); line-height: 1.33; color: var(--ja-ink); }
-  .ja-h3 { font-family: "Nunito", sans-serif; font-weight: 700; font-size: 20px; line-height: 1.35; color: #000; }
+  /* Type */
+  .ja-h1 { font-family: "Work Sans", sans-serif; font-weight: 600; font-size: 75px; line-height: 88px; color: #fff; max-width: 900px; }
+  .ja-h2 { font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 45px; line-height: 55px; color: var(--ja-ink); }
+  .ja-h5 { font-family: "Nunito", sans-serif; font-weight: 500; font-size: 20px; line-height: 28px; }
   .ja-hl { color: var(--ja-yellow); }
 
-  .ja-kicker {
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px;
-    font-weight: 600; font-size: 15px; color: var(--ja-yellow);
-  }
-  .ja-kicker::before { content: ""; width: 28px; height: 2px; background: var(--ja-yellow); }
-
-  /* Buttons — the site's yellow, 3px corners, dark text */
+  /* Buttons — the site's yellow, 3px corners, Nunito 600 */
   .ja-btn {
-    display: inline-block; font-family: "Nunito", sans-serif; font-weight: 600; font-size: 16px;
-    padding: 12px 24px; border-radius: 3px; text-decoration: none; transition: filter .15s ease;
+    display: inline-block; font: 600 16px/25px "Nunito", sans-serif;
+    padding: 8px 16px; border-radius: 3px; text-decoration: none;
+    background: var(--ja-yellow); color: var(--ja-text); white-space: nowrap;
+    transition: filter .15s ease;
   }
-  .ja-btn:hover { filter: brightness(0.95); }
-  .ja-btn-primary { background: var(--ja-yellow); color: var(--ja-text); }
-  .ja-btn-outline { color: var(--ja-white); border: 1px solid rgba(255,255,255,.45); margin-left: 12px; }
-  .ja-btn-outline:hover { border-color: var(--ja-yellow); color: var(--ja-yellow); filter: none; }
+  .ja-btn:hover { filter: brightness(.94); }
+  .ja-btn-lg { padding: 12px 24px; }
+  .ja-btn-ghost { background: transparent; color: #fff; box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); }
+  .ja-btn-ghost:hover { box-shadow: inset 0 0 0 1px var(--ja-yellow); color: var(--ja-yellow); filter: none; }
 
-  /* Hero */
+  /* Header — black 85%, fixed, logo + nav + yellow CTA */
+  .ja-header { position: fixed; top: 0; left: 0; right: 0; z-index: 20; background: rgba(0,0,0,.85); }
+  .ja-header .ja-container { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .ja-logo img { display: block; width: 165px; height: 41px; }
+  .ja-nav { display: flex; align-items: center; gap: 36px; font-size: 14px; line-height: 20px; }
+  .ja-nav a { color: #fff; text-decoration: none; }
+  .ja-nav a:not(.ja-btn):hover { color: var(--ja-yellow); }
+
+  /* Hero — full-bleed photo, left-aligned heading, like the homepage slider */
   .ja-hero {
+    position: relative; min-height: 870px; display: flex; align-items: center; color: #fff;
     background:
-      radial-gradient(1100px 500px at 85% 20%, rgba(254,207,56,.10), transparent 60%),
-      linear-gradient(180deg, var(--ja-dark-2) 0%, var(--ja-dark) 100%);
-    color: var(--ja-white);
-    padding: 140px 0 120px !important;
+      linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.25) 100%),
+      url("https://cms-jappware-website-production.up.railway.app/assets/18379bcb-4847-45e9-852e-0fccc3a49778?width=1920&quality=90&format=webp&height=800&fit=cover") center / cover no-repeat,
+      #111;
+    padding: 120px 0 160px;
   }
-  .ja-hero-lead { font-size: 17px; line-height: 27px; max-width: 600px; margin-top: 24px; color: rgba(255,255,255,.88); }
-  .ja-hero-cta { margin-top: 36px; }
-  .ja-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 64px; font-size: 15px; color: rgba(255,255,255,.75); }
-  .ja-flow b { font-weight: 600; color: var(--ja-white); }
-  .ja-flow i { font-style: normal; color: var(--ja-yellow); }
+  .ja-eyebrow { display: inline-block; margin-bottom: 20px; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--ja-yellow); font-weight: 600; }
+  .ja-hero-lead { margin-top: 24px; max-width: 560px; font-size: 18px; line-height: 28px; }
+  .ja-hero-cta { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
 
-  /* Problem */
-  .ja-problem .ja-wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
-  .ja-problem .ja-kicker { color: #b88f00; }
-  .ja-problem .ja-kicker::before { background: #b88f00; }
-  .ja-problem-body p { font-size: 17px; color: var(--ja-muted); }
-  .ja-problem-body p + p { margin-top: 14px; color: var(--ja-text); font-weight: 600; }
+  /* Flow band — glass cards overlapping the hero, like the 73+ / 65+ results row */
+  .ja-flow { position: relative; z-index: 2; margin-top: -96px; }
+  .ja-flow-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+  .ja-flow-item {
+    background: rgba(18,19,26,.72); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--ja-radius); box-shadow: var(--ja-shadow);
+    padding: 18px 14px; text-align: center; color: #fff;
+  }
+  .ja-flow-item b { display: block; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 32px; line-height: 40px; color: var(--ja-yellow); }
+  .ja-flow-item span { display: block; margin-top: 4px; font-size: 15px; line-height: 20px; }
 
-  /* Numbered cards — like the site's 01–06 cards */
-  .ja-steps { background: var(--ja-soft); }
-  .ja-steps .ja-kicker, .ja-benefits .ja-kicker { color: #b88f00; }
-  .ja-steps .ja-kicker::before, .ja-benefits .ja-kicker::before { background: #b88f00; }
-  .ja-card-grid { display: grid; gap: 56px 30px; margin-top: 72px; }
-  .ja-steps .ja-card-grid { grid-template-columns: repeat(4, 1fr); }
-  .ja-benefits .ja-card-grid { grid-template-columns: repeat(3, 1fr); }
-  .ja-card {
-    position: relative; background: var(--ja-white); box-shadow: var(--ja-shadow);
-    padding: 44px 26px 30px;
-  }
-  .ja-num {
-    position: absolute; top: -34px; left: 22px;
-    font-family: "Work Sans", sans-serif; font-weight: 300; font-size: 56px; line-height: 1;
-    color: var(--ja-yellow);
-  }
-  .ja-card .ja-h3 { margin-bottom: 14px; }
-  .ja-card p { font-size: 15px; line-height: 1.6; color: var(--ja-text); }
+  /* Generic section */
+  .ja-section { padding: 120px 0; }
+  .ja-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .ja-sub { margin-top: 24px; max-width: 560px; }
 
-  /* Closing */
-  .ja-close {
-    background:
-      radial-gradient(900px 420px at 15% 100%, rgba(254,207,56,.10), transparent 60%),
-      var(--ja-dark);
-    color: var(--ja-white);
-  }
-  .ja-close .ja-h2 { color: var(--ja-white); max-width: 820px; }
-  .ja-close-lead { margin-top: 20px; max-width: 680px; color: rgba(255,255,255,.85); }
-  .ja-tagline { margin-top: 28px; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 22px; color: var(--ja-yellow); }
-  .ja-close .ja-btn { margin-top: 36px; }
+  /* Problem — text + photo, like "Build Your Future" */
+  .ja-problem .ja-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .ja-problem-body p { margin-top: 24px; color: var(--ja-text); }
+  .ja-problem-body p.ja-strong { font-weight: 600; color: var(--ja-ink); border-left: 3px solid var(--ja-yellow); padding-left: 16px; }
+  .ja-photo { border-radius: var(--ja-radius); overflow: hidden; box-shadow: var(--ja-shadow); aspect-ratio: 4 / 3; background: #222 center / cover no-repeat; }
 
-  @media (max-width: 991px) {
-    .ja-steps .ja-card-grid, .ja-benefits .ja-card-grid { grid-template-columns: repeat(2, 1fr); }
-    .ja-problem .ja-wrap { grid-template-columns: 1fr; gap: 28px; }
+  /* How it works — white numbered cards with big yellow numbers, like "Our Essence" */
+  .ja-steps { background: #f7f7f8; }
+  .ja-cards { display: grid; gap: 60px 30px; margin-top: 80px; }
+  .ja-cards-4 { grid-template-columns: repeat(4, 1fr); }
+  .ja-card { position: relative; background: #fff; box-shadow: var(--ja-shadow); padding: 44px 24px 28px; }
+  .ja-num { position: absolute; top: -34px; left: 20px; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 56px; line-height: 1; color: var(--ja-yellow); }
+  .ja-card .ja-h5 { color: #000; margin-bottom: 14px; }
+  .ja-card p { font-size: 15px; line-height: 22px; }
+
+  /* What you get — dark band with glass boxes, like "Knowledgebase" */
+  .ja-dark { background: var(--ja-secondary); color: #fff; }
+  .ja-dark .ja-h2 { color: #fff; }
+  .ja-boxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 56px; }
+  .ja-box {
+    background: var(--ja-glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-radius: var(--ja-radius); box-shadow: var(--ja-shadow); padding: 24px;
   }
-  @media (max-width: 575px) {
-    .ja-wrap { padding: 0 16px; }
-    .ja section { padding: 72px 0; }
-    .ja-hero { padding: 104px 0 80px !important; }
-    .ja-steps .ja-card-grid, .ja-benefits .ja-card-grid { grid-template-columns: 1fr; }
-    .ja-btn { display: block; text-align: center; }
-    .ja-btn-outline { margin: 12px 0 0; }
+  .ja-box-head { position: relative; padding-right: 36px; margin-bottom: 24px; }
+  .ja-box-icon {
+    position: absolute; top: 2px; right: 0; width: 24px; height: 24px; border-radius: 3px;
+    background: var(--ja-yellow); display: grid; place-items: center;
+  }
+  .ja-box-icon svg { width: 14px; height: 14px; }
+  .ja-box p { font-size: 15px; line-height: 22px; color: rgba(255,255,255,.9); }
+
+  /* Why Jappware — quote-like statement */
+  .ja-why { text-align: center; }
+  .ja-why .ja-h2 { max-width: 860px; margin: 0 auto; }
+  .ja-why p { max-width: 700px; margin: 28px auto 0; }
+  .ja-tagline { margin-top: 32px !important; font-family: "Work Sans", sans-serif; font-weight: 500; font-size: 24px; line-height: 32px; color: var(--ja-ink); }
+  .ja-tagline span { box-shadow: inset 0 -10px 0 rgba(254,207,56,.55); }
+
+  /* Footer CTA — like "Want to improve your business?" */
+  .ja-cta { background: var(--ja-secondary); color: #fff; text-align: center; padding: 80px 0; }
+  .ja-cta h5 { font: 400 18px/28px "Nunito", sans-serif; color: rgba(255,255,255,.85); }
+  .ja-cta .ja-h2 { color: #fff; margin-top: 12px; }
+  .ja-cta .ja-btn { margin-top: 36px; }
+  .ja-foot { background: #2b2b2b; color: rgba(255,255,255,.7); font-size: 14px; line-height: 20px; padding: 24px 0; }
+  .ja-foot .ja-container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .ja-foot a { text-decoration: none; }
+  .ja-foot a:hover { color: var(--ja-yellow); }
+
+  /* Responsive — mirrors the site's breakpoints */
+  @media (max-width: 1023px) {
+    .ja-h1 { font-size: 52px; line-height: 62px; }
+    .ja-nav a:not(.ja-btn) { display: none; }
+    .ja-flow-grid { grid-template-columns: repeat(3, 1fr); }
+    .ja-cards-4 { grid-template-columns: repeat(2, 1fr); }
+    .ja-problem .ja-container { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 767px) {
+    .ja { font-size: 16px; line-height: 25px; }
+    .ja-header .ja-container { height: 64px; }
+    .ja-logo img { width: 122px; height: 30px; }
+    .ja-h1 { font-size: 40px; line-height: 50px; }
+    .ja-h2 { font-size: 30px; line-height: 40px; }
+    .ja-hero { min-height: 0; padding: 140px 0 140px; }
+    .ja-section { padding: 80px 0; }
+    .ja-flow-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .ja-cards-4, .ja-boxes { grid-template-columns: 1fr; }
+    .ja-head { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body>
 <div class="ja">
 
+  <!-- HEADER -->
+  <header class="ja-header">
+    <div class="ja-container">
+      <a class="ja-logo" href="https://www.jappware.com/" aria-label="Jappware home">
+        <img src="https://cms-jappware-website-production.up.railway.app/assets/babaf6d7-be80-4fb9-a64c-ee86893f78a3?width=330" alt="Jappware" width="165" height="41">
+      </a>
+      <nav class="ja-nav" aria-label="Page sections">
+        <a href="#problem">The problem</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#what-you-get">What you get</a>
+        <a href="#why">Why Jappware</a>
+        <a class="ja-btn" href="#contact">Get Free Estimation</a>
+      </nav>
+    </div>
+  </header>
+
   <!-- HERO -->
   <section class="ja-hero">
-    <div class="ja-wrap">
-      <span class="ja-kicker">Jappware Agentic</span>
+    <div class="ja-container">
+      <span class="ja-eyebrow">Jappware Agentic</span>
       <h1 class="ja-h1">From idea to production — <span class="ja-hl">specified, tested, reviewed.</span></h1>
       <p class="ja-hero-lead">Our AI-powered delivery workflow. Senior engineers and AI agents work together through one disciplined process, so you get software faster — without trading away quality, security or control.</p>
       <div class="ja-hero-cta">
-        <a class="ja-btn ja-btn-primary" href="#contact">Let's talk</a>
-        <a class="ja-btn ja-btn-outline" href="#how-it-works">How it works</a>
-      </div>
-      <div class="ja-flow" aria-label="Delivery flow">
-        <b>Idea</b><i>→</i><b>Spec</b><i>→</i><b>Design</b><i>→</i><b>Test-first build</b><i>→</i><b>Independent review</b><i>→</i><b>Ship</b>
+        <a class="ja-btn ja-btn-lg" href="#contact">Let's talk</a>
+        <a class="ja-btn ja-btn-lg ja-btn-ghost" href="#how-it-works">How it works</a>
       </div>
     </div>
   </section>
 
+  <!-- FLOW BAND -->
+  <div class="ja-flow" aria-label="Delivery flow">
+    <div class="ja-container">
+      <div class="ja-flow-grid">
+        <div class="ja-flow-item"><b>01</b><span>Idea</span></div>
+        <div class="ja-flow-item"><b>02</b><span>Spec</span></div>
+        <div class="ja-flow-item"><b>03</b><span>Design</span></div>
+        <div class="ja-flow-item"><b>04</b><span>Test-first build</span></div>
+        <div class="ja-flow-item"><b>05</b><span>Independent review</span></div>
+        <div class="ja-flow-item"><b>06</b><span>Ship</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- PROBLEM -->
-  <section class="ja-problem">
-    <div class="ja-wrap">
-      <div>
-        <span class="ja-kicker">The problem</span>
-        <h2 class="ja-h2">AI can write code in seconds. But fast code isn't the same as the right code.</h2>
-      </div>
+  <section class="ja-section ja-problem" id="problem">
+    <div class="ja-container">
       <div class="ja-problem-body">
+        <h2 class="ja-h2">AI can write code in seconds. But fast code isn't the same as the right code.</h2>
         <p>Requirements get lost, tests get skipped, and nobody can say for sure that what shipped is what you asked for.</p>
-        <p>We built Jappware Agentic so speed and certainty come together.</p>
+        <p class="ja-strong">We built Jappware Agentic so speed and certainty come together.</p>
       </div>
+      <div class="ja-photo" role="img" aria-label="Jappware engineering team at work"
+           style="background-image:url('https://cms-jappware-website-production.up.railway.app/assets/9c7e96ee-523c-4f14-bf8e-4ed128a91c72?width=1200&quality=90&format=webp&height=900&fit=cover')"></div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="ja-steps" id="how-it-works">
-    <div class="ja-wrap">
-      <span class="ja-kicker">How it works</span>
-      <h2 class="ja-h2">One process, from the first idea to release</h2>
-      <div class="ja-card-grid">
+  <section class="ja-section ja-steps" id="how-it-works">
+    <div class="ja-container">
+      <div class="ja-head">
+        <div>
+          <h2 class="ja-h2">How it works</h2>
+          <p class="ja-sub">One process, from the first idea to release.</p>
+        </div>
+        <a class="ja-btn" href="#contact">Get Free Estimation</a>
+      </div>
+      <div class="ja-cards ja-cards-4">
         <div class="ja-card">
           <span class="ja-num">01</span>
-          <h3 class="ja-h3">Understand</h3>
+          <h3 class="ja-h5">Understand</h3>
           <p>Your idea becomes a clear, reviewed specification with measurable acceptance criteria. Ambiguities are resolved before any code is written.</p>
         </div>
         <div class="ja-card">
           <span class="ja-num">02</span>
-          <h3 class="ja-h3">Design</h3>
+          <h3 class="ja-h5">Design</h3>
           <p>Architecture, data model, API contracts and user flows are designed against your real system, with key decisions documented.</p>
         </div>
         <div class="ja-card">
           <span class="ja-num">03</span>
-          <h3 class="ja-h3">Build</h3>
+          <h3 class="ja-h5">Build</h3>
           <p>Work is split into small tasks. For each one the test comes first, then the code that makes it pass.</p>
         </div>
         <div class="ja-card">
           <span class="ja-num">04</span>
-          <h3 class="ja-h3">Verify &amp; Ship</h3>
+          <h3 class="ja-h5">Verify &amp; Ship</h3>
           <p>An independent reviewer checks every change against your requirements and a security checklist. Our engineers sign off before release.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BENEFITS -->
-  <section class="ja-benefits">
-    <div class="ja-wrap">
-      <span class="ja-kicker">What you get</span>
-      <h2 class="ja-h2">Speed you can trust</h2>
-      <div class="ja-card-grid">
-        <div class="ja-card">
-          <span class="ja-num">01</span>
-          <h3 class="ja-h3">Nothing Gets Lost</h3>
+  <!-- WHAT YOU GET -->
+  <section class="ja-section ja-dark" id="what-you-get">
+    <div class="ja-container">
+      <div class="ja-head">
+        <div>
+          <h2 class="ja-h2">Speed you can trust</h2>
+          <p class="ja-sub" style="color:rgba(255,255,255,.85)">What you get with Jappware Agentic.</p>
+        </div>
+      </div>
+      <div class="ja-boxes">
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">Nothing Gets Lost</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>Every requirement is traced from the spec to the code and the test that proves it.</p>
-        </div>
-        <div class="ja-card">
-          <span class="ja-num">02</span>
-          <h3 class="ja-h3">Quality Built In</h3>
+        </article>
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">Quality Built In</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>Test-first development on every task, with automated checks at each step.</p>
-        </div>
-        <div class="ja-card">
-          <span class="ja-num">03</span>
-          <h3 class="ja-h3">A Second Pair of Eyes</h3>
+        </article>
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">A Second Pair of Eyes</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>An independent review that never saw the code being written, so it catches what the authors missed.</p>
-        </div>
-        <div class="ja-card">
-          <span class="ja-num">04</span>
-          <h3 class="ja-h3">Security by Default</h3>
+        </article>
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">Security by Default</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>Access control, data exposure, secrets and new dependencies are checked on every change.</p>
-        </div>
-        <div class="ja-card">
-          <span class="ja-num">05</span>
-          <h3 class="ja-h3">You Stay in Control</h3>
+        </article>
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">You Stay in Control</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>AI proposes, people decide. Every important decision is made with you and written down.</p>
-        </div>
-        <div class="ja-card">
-          <span class="ja-num">06</span>
-          <h3 class="ja-h3">Fits Your Stack</h3>
+        </article>
+        <article class="ja-box">
+          <div class="ja-box-head"><h3 class="ja-h5">Fits Your Stack</h3><span class="ja-box-icon" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="#252833" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></div>
           <p>Works with your existing codebase and tools, or helps you start a new product from scratch. Specs and decisions stay in your repository.</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- CLOSING -->
-  <section class="ja-close" id="contact">
-    <div class="ja-wrap">
-      <span class="ja-kicker">Why Jappware</span>
+  <!-- WHY JAPPWARE -->
+  <section class="ja-section ja-why" id="why">
+    <div class="ja-container">
       <h2 class="ja-h2">AI alone ships guesses. Engineers alone ship slowly.</h2>
-      <p class="ja-close-lead">Jappware Agentic combines both: experienced engineers who own the outcome, and AI agents that carry the routine work through a process built to catch mistakes early.</p>
-      <p class="ja-tagline">Faster delivery. Fewer surprises. Software you can trust.</p>
-      <a class="ja-btn ja-btn-primary" href="#contact">Get Free Estimation</a>
+      <p>Jappware Agentic combines both: experienced engineers who own the outcome, and AI agents that carry the routine work through a process built to catch mistakes early.</p>
+      <p class="ja-tagline"><span>Faster delivery. Fewer surprises. Software you can trust.</span></p>
     </div>
   </section>
+
+  <!-- CTA -->
+  <section class="ja-cta" id="contact">
+    <div class="ja-container">
+      <h5>Want to improve your business?</h5>
+      <h2 class="ja-h2">Speed is new Quality. Let's prove it on your product.</h2>
+      <a class="ja-btn ja-btn-lg" href="https://www.jappware.com/get-in-touch/">Get Free Estimation</a>
+    </div>
+  </section>
+
+  <footer class="ja-foot">
+    <div class="ja-container">
+      <span>© Jappware</span>
+      <a href="https://www.jappware.com/">jappware.com</a>
+    </div>
+  </footer>
 
 </div>
 </body>
