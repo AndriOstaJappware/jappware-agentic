@@ -60,7 +60,7 @@
   .ja-header .ja-container { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
   .ja-logo img { display: block; width: 165px; height: 41px; }
   .ja-nav { display: flex; align-items: center; gap: 36px; font-size: 14px; line-height: 20px; }
-  .ja-nav a { color: #fff; text-decoration: none; }
+  .ja-nav a:not(.ja-btn) { color: #fff; text-decoration: none; }
   .ja-nav a:not(.ja-btn):hover { color: var(--ja-yellow); }
 
   /* Hero — full-bleed photo, left-aligned heading, like the homepage slider */
@@ -112,7 +112,7 @@
   .ja-dark .ja-h2 { color: #fff; }
   .ja-boxes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 56px; }
   .ja-box {
-    background: var(--ja-glass); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    background: var(--ja-glass);
     border-radius: var(--ja-radius); box-shadow: var(--ja-shadow); padding: 24px;
   }
   .ja-box-head { position: relative; padding-right: 36px; margin-bottom: 24px; }
